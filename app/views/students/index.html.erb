@@ -1,0 +1,33 @@
+<h2>Students</h2>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <!-- PROFILE -->
+    <% @students.each do |student| %>
+    <div class="profile-sidebar well">
+      <!-- SIDEBAR USERPIC -->
+      <div class="profile-userpic">
+        <%= image_tag student.picture.url, alt: student.first_name ,class: "img-responsive" if !student.picture.file.nil? %>
+      </div>
+      <!-- END SIDEBAR USERPIC -->
+      <!-- SIDEBAR USER TITLE -->
+      <div class="profile-usertitle">
+        <div class="profile-usertitle-name">
+          <%= student.first_name + " " + student.last_name %>
+        </div>
+        <div class="profile-usertitle-job">
+          <%= student.birthdate.strftime("%Y/%m/%d") if !student.birthdate.nil? %>
+        </div>
+      </div>
+      <!-- END SIDEBAR USER TITLE -->
+      <!-- SIDEBAR BUTTONS -->
+      <div class="profile-userbuttons">
+        <%= link_to "Edit Student", edit_student_path(student), class: "btn btn-success btn-sm" %>
+        <%= link_to "Delete Student", student_path(student), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
+      </div>
+    </div>
+    <% end %>
+    <!--END OF PROFILE -->
+  </div>
+  <div class="col-md-4"></div>
+</div>

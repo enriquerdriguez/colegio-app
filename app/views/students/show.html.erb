@@ -1,0 +1,60 @@
+<h2><%= @student.first_name + " " + @student.last_name %> </h2>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-7">
+    </div>
+    <!-- PROFILE SIDEBAR -->
+    <div class="col-md-4">
+      <div class="profile-sidebar">
+        <!-- SIDEBAR USERPIC -->
+        <div class="profile-userpic">
+          <%= image_tag @student.picture.url, alt: @student.first_name ,class: "img-responsive" if !@student.picture.file.nil? %>
+        </div>
+        <!-- END SIDEBAR USERPIC -->
+        <!-- SIDEBAR USER TITLE -->
+        <div class="profile-usertitle">
+          <div class="profile-usertitle-name">
+            <%= @student.first_name + " " + @student.last_name %>
+          </div>
+          <div class="profile-usertitle-job">
+            <%= @student.birthdate.strftime("%Y/%m/%d") if !@student.birthdate.nil? %>
+          </div>
+        </div>
+        <!-- END SIDEBAR USER TITLE -->
+        <!-- SIDEBAR BUTTONS -->
+        <div class="profile-userbuttons">
+          <%= link_to "Edit Student", edit_student_path(@student), class: "btn btn-success btn-sm" %>
+          <%= link_to "Delete Student", student_path(@student), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
+        </div>
+        <!-- END SIDEBAR BUTTONS -->
+        <!-- SIDEBAR MENU -->
+        <div class="profile-usermenu">
+          <ul class="nav">
+            <li class="active">
+              <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+                Overview </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="glyphicon glyphicon-user"></i>
+                Account Settings </a>
+            </li>
+            <li>
+              <a href="#" target="_blank">
+                <i class="glyphicon glyphicon-ok"></i>
+                Tasks </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="glyphicon glyphicon-flag"></i>
+                Help </a>
+            </li>
+          </ul>
+        </div>
+        <!-- END MENU -->
+      </div>
+    </div>
+    <!-- END OF PROFILE SIDEBAR -->
+  </div>
+

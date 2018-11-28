@@ -1,0 +1,33 @@
+<h2>Professors</h2>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <!-- PROFILE -->
+    <% @professors.each do |professor| %>
+      <div class="profile-sidebar well">
+        <!-- SIDEBAR USERPIC -->
+        <div class="profile-userpic">
+          <%= image_tag professor.picture.url, alt: professor.first_name ,class: "img-responsive" if !professor.picture.file.nil? %>
+        </div>
+        <!-- END SIDEBAR USERPIC -->
+        <!-- SIDEBAR USER TITLE -->
+        <div class="profile-usertitle">
+          <div class="profile-usertitle-name">
+            <%= professor.first_name + " " + professor.last_name %>
+          </div>
+          <div class="profile-usertitle-job">
+            <%= professor.birthdate.strftime("%Y/%m/%d") if !professor.birthdate.nil? %>
+          </div>
+        </div>
+        <!-- END SIDEBAR USER TITLE -->
+        <!-- SIDEBAR BUTTONS -->
+        <div class="profile-userbuttons">
+          <%= link_to "Edit professor", edit_professor_path(professor), class: "btn btn-success btn-sm" %>
+          <%= link_to "Delete professor", professor_path(professor), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
+        </div>
+      </div>
+    <% end %>
+    <!--END OF PROFILE -->
+  </div>
+  <div class="col-md-4"></div>
+</div>

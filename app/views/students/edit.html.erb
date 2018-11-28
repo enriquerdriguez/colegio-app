@@ -1,0 +1,7 @@
+<div class="row">
+  <h2>Edit <%= @student.first_name  + " " + @student.last_name %></h2>
+  <div class="col-md-8">
+    <%= render 'shared/student-professor-form', obj: @student %>
+  </div>
+  <div class="col-md-offset-4"></div>
+</div>
