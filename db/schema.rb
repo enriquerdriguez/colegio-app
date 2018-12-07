@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_151742) do
+ActiveRecord::Schema.define(version: 2018_12_05_085851) do
+
+  create_table "course_subjects", force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "subject_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "professor_id"
+    t.index ["course_id", "subject_id", "professor_id"], name: "unique_professor", unique: true
+    t.index ["course_id"], name: "index_course_subjects_on_course_id"
+    t.index ["professor_id"], name: "index_course_subjects_on_professor_id"
+    t.index ["subject_id"], name: "index_course_subjects_on_subject_id"
+  end
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
@@ -30,6 +42,15 @@ ActiveRecord::Schema.define(version: 2018_11_28_151742) do
     t.datetime "birthdate"
   end
 
+  create_table "student_subjects", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "subject_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_student_subjects_on_student_id"
+    t.index ["subject_id"], name: "index_student_subjects_on_subject_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -39,6 +60,7 @@ ActiveRecord::Schema.define(version: 2018_11_28_151742) do
     t.datetime "updated_at", null: false
     t.string "picture"
     t.datetime "birthdate"
+    t.integer "course_id"
   end
 
   create_table "subjects", force: :cascade do |t|

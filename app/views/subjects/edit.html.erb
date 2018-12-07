@@ -1,5 +1,6 @@
 <h2> Editing: <%= @subject.name %></h2>
 <div class="row">
+  <%= render 'shared/errors', obj: @subject %>
   <div class="col-md-offset-2"></div>
   <div class="col-md-8">
     <%= render 'subjects/form', obj: @subject %>

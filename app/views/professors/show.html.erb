@@ -2,59 +2,53 @@
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-7">
+    <div class="row">
+      <% if @professor.course_subjects.size > 0 %>
+      <h3>Subjects Taugh</h3>
+      <div class="col-md-12">
+        <table class="table table-striped">
+          <thead>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Action</th>
+          </thead>
+          <tbody>
+            <% @professor.course_subjects.each do |course_subject| %>
+            <tr>
+              <td><%= course_subject.subject_name %> </td>
+              <td><%= link_to course_subject.course_name + " " + course_subject.course_level, course_path(course_subject.course) %></td>
+              <td>
+                <%= link_to "Delete Subject", course_subject_path(course_subject: course_subject.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm"  %>
+              </td>
+              <td>
+                <%= link_to "View Students", professor_professor_view_students_path(professor_id: @professor.id, course_id:course_subject.course), remote: true, class: "btn btn-primary btn-sm"  %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <% else %>
+      <h3> Currently not teaching</h3>
+        <%= link_to "Add Course", courses_path, class: "btn btn-primary btn-lg" %>
+      <% end %>
+    </div>
   </div>
   <!-- PROFILE SIDEBAR -->
   <div class="col-md-4">
-    <div class="profile-sidebar">
-      <!-- SIDEBAR USERPIC -->
-      <div class="profile-userpic">
-        <%= image_tag @professor.picture.url, alt: @professor.first_name ,class: "img-responsive" if !@professor.picture.file.nil? %>
-      </div>
-      <!-- END SIDEBAR USERPIC -->
-      <!-- SIDEBAR USER TITLE -->
-      <div class="profile-usertitle">
-        <div class="profile-usertitle-name">
-          <%= @professor.first_name + " " + @professor.last_name %>
-        </div>
-        <div class="profile-usertitle-job">
-          <%= @professor.birthdate.strftime("%Y/%m/%d") if !@professor.birthdate.nil? %>
-        </div>
-      </div>
-      <!-- END SIDEBAR USER TITLE -->
-      <!-- SIDEBAR BUTTONS -->
-      <div class="profile-userbuttons">
-        <%= link_to "Edit Student", edit_student_path(@professor), class: "btn btn-success btn-sm" %>
-        <%= link_to "Delete Student", student_path(@professor), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
-      </div>
-      <!-- END SIDEBAR BUTTONS -->
-      <!-- SIDEBAR MENU -->
-      <div class="profile-usermenu">
-        <ul class="nav">
-          <li class="active">
-            <a href="#">
-              <i class="glyphicon glyphicon-home"></i>
-              Overview </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="glyphicon glyphicon-user"></i>
-              Account Settings </a>
-          </li>
-          <li>
-            <a href="#" target="_blank">
-              <i class="glyphicon glyphicon-ok"></i>
-              Tasks </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="glyphicon glyphicon-flag"></i>
-              Help </a>
-          </li>
-        </ul>
-      </div>
-      <!-- END MENU -->
-    </div>
+    <%= render 'professors/sidebar' %>
+  </div>
   </div>
   <!-- END OF PROFILE SIDEBAR -->
 </div>
 
+
+<div id="view-students-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 <div class="row">
   <h2>Create new Student</h2>
+  <%= render 'shared/errors', obj: @student %>
   <div class="col-md-8">
     <%= render 'shared/student-professor-form', obj: @student %>
   </div>

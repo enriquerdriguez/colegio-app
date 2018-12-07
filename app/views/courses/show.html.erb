@@ -1,0 +1,61 @@
+<h2> <%= @course.name + " " + @course.level  %></h2>
+<div class="row">
+  <div class="col-md-offset-2"></div>
+  <div class="col-md-8">
+    <h3> Subjects</h3>
+    <table class="table table-striped">
+      <thead>
+      <th>Name</th>
+      <th>Teacher</th>
+      <th>Action</th>
+      </thead>
+      <tbody>
+      <%@course.subjects.order(:name).each do |subject| %>
+        <tr>
+          <td><%= subject.name %></td>
+          <%
+            course_subject = CourseSubject.where(subject_id: subject.id, course_id: @course.id).first
+          %>
+          <td><%= link_to course_subject.professor_first_name + " " + course_subject.professor_last_name, professor_path(course_subject.professor)   %></td>
+          <td><%= link_to "Delete Subject", course_subject_path(course_subject: course_subject.id) ,method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %></td>
+          <td><%= link_to "Change Professor", edit_course_subject_path(course_subject: course_subject.id) ,remote: true, class: "btn btn-primary btn-sm" %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <h3>Add more subjects to course: </h3>
+    <table class="table table-striped">
+      <thead>
+        <th>Name</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+      <% @course.subjects_to_add.each do |subject| %>
+        <tr>
+          <td><%= subject.name %></td>
+          <td>
+            <%= link_to "Add Subject", new_course_subject_path(subject_id: subject.id, course_id: @course.id), remote: true, class: "btn btn-success btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-offset-2"></div>
+</div>
+
+<div id="add-teacher-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+

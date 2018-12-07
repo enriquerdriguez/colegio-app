@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <%
+    course = @students[0].course_name + " " + @students[0].course_level
+  %>
+  <h4 class="modal-title"><%= "Students for " + course %></h4>
+</div>
+<div class="modal-body">
+  <% if @students.size > 0 %>
+  <div class="row">
+    <h3 style="margin-left: 15%;">Students:</h3>
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <table class="table-striped table">
+        <thead>
+        <th></th>
+        <th>Name</th>
+        </thead>
+        <tbody>
+        <% @students.each do |student| %>
+          <tr>
+            <td> <%= image_tag student.picture.url, size: "100x100", alt: student.first_name ,class: "img-responsive" if !student.picture.file.nil? %></td>
+            <td><%= link_to student.first_name + " " + student.last_name, student_path(student) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <% else %>
+    <h3> No students in this class</h3>
+  <% end %>
+</div> <!-- END OF MODAL BODY -->

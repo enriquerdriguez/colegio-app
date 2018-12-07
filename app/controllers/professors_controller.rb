@@ -3,7 +3,7 @@ class ProfessorsController < ApplicationController
   before_action :set_professor, only: [:show, :edit, :update, :destroy]
 
   def index
-    @professors = Professor.all
+    @professors = Professor.paginate(page: params[:page], per_page: 4)
   end
 
   def show
@@ -19,7 +19,6 @@ class ProfessorsController < ApplicationController
       flash[:success] = "Professor saved successfully"
       redirect_to professor_path(@professor)
     else
-      flash[:danger] = "There was a problem saving the professor"
       render 'new'
     end
   end
@@ -32,7 +31,6 @@ class ProfessorsController < ApplicationController
       flash[:success] = "Professor updated successfully"
       redirect_to professor_path(@professor)
     else
-      flash[:danger] = "Professor coudnt be updated"
       render 'edit'
     end
   end

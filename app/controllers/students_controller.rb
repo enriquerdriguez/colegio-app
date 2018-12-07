@@ -6,7 +6,7 @@ class StudentsController < ApplicationController
   end
 
   def index
-    @students = Student.all
+    @students = Student.paginate(page: params[:page], per_page: 4)
   end
 
   def new
@@ -19,7 +19,6 @@ class StudentsController < ApplicationController
       flash[:success] = "Student created successfully"
       redirect_to student_path(@student)
     else
-      flash[:danger] = "There was a problem creating the student"
       render 'new'
     end
   end
@@ -32,7 +31,6 @@ class StudentsController < ApplicationController
       flash[:success] = "Student updated Succesfully"
       redirect_to student_path(@student)
     else
-      flash[:danger] = "Student couldnt be updated"
       render 'edit'
     end
   end
@@ -42,6 +40,12 @@ class StudentsController < ApplicationController
     flash[:danger] = "Student was successfully deleted"
     redirect_to students_path
   end
+
+  def change_course
+
+  end
+
+
 
   private
     def student_params

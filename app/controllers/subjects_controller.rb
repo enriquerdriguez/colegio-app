@@ -19,7 +19,6 @@ class SubjectsController < ApplicationController
       flash[:success] = "Subject saved successfully"
       redirect_to subjects_path
     else
-      flash[:danger] = "Subject didnt save"
       render 'new'
     end
   end

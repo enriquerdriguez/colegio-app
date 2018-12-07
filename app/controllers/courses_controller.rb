@@ -19,7 +19,6 @@ class CoursesController < ApplicationController
       flash[:success] = "Course created successfully"
       redirect_to courses_path
     else
-      flash[:danger] = "Course coudnt be created"
       render 'new'
     end
   end
@@ -32,7 +31,6 @@ class CoursesController < ApplicationController
       flash[:success] = "Course edited successfully"
       redirect_to courses_path
     else
-      flash[:danger] = "We coudnt update the course"
       render 'edit'
     end
   end
