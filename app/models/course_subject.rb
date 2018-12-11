@@ -4,7 +4,7 @@ class CourseSubject < ApplicationRecord
   belongs_to :professor
 
   #has_one :course_subject_professors
-  #has_one :professor, through: :course_subject_professors
+  #has_one :professor
 
   delegate :name, :level, :id,:students, to: :course, prefix: true
   delegate :name, :id, to: :subject, prefix: true

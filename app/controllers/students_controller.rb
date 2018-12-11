@@ -49,7 +49,7 @@ class StudentsController < ApplicationController
 
   private
     def student_params
-      params.require(:student).permit(:first_name, :last_name, :email, :telephone, :picture, :birthdate)
+      params.require(:student).permit(:first_name, :last_name, :email, :telephone, :picture, :birthdate, :course_id)
     end
 
     def set_student

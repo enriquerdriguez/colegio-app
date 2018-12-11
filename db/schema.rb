@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2018_12_05_085851) do
     t.string "picture"
     t.datetime "birthdate"
     t.integer "course_id"
+    t.index ["course_id"], name: "index_students_on_course_id"
   end
 
   create_table "subjects", force: :cascade do |t|

@@ -27,7 +27,12 @@ class SubjectsController < ApplicationController
   end
 
   def update
-
+    if @subject.update(subject_params)
+      flash[:success] = "Subject updated successfully"
+      redirect_to subjects_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy
