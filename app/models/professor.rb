@@ -1,4 +1,4 @@
-class Professor < ApplicationRecord
+class Professor < User
 
 
   #has_many :course_subject_professors

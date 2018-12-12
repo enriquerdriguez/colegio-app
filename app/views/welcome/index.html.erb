@@ -1,5 +1,32 @@
+<% if user_signed_in? %>
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-md-6">
+        <p align="center"><%= link_to "Students", students_path , class: "btn btn-lg btn-primary" %></p>
+      </div>
+      <div class="col-md-6">
+        <p align="center"><%= link_to "Professors", professors_path , class: "btn btn-lg btn-primary" %></p>
+      </div>
+      <p align="center" style="margin: 2em;">
+      </p>
+    </div>
+    <div class="row" style="margin-top: 3em;">
+      <div class="col-md-6">
+        <p align="center"><%= link_to "Subjects", subjects_path , class: "btn btn-lg btn-primary" %></p>
+      </div>
+      <div class="col-md-6">
+        <p align="center"><%= link_to "Courses", courses_path , class: "btn btn-lg btn-primary" %></p>
+      </div>
+      <p align="center" style="margin: 2em;">
+      </p>
+    </div>
+  </div>
+<% else %>
 <div class="jumbotron">
-  <h1>Hello, world!</h1>
-  <p>...</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+  <h1 class="black">Hello, world!</h1>
+  <p align="center" style="margin: 2em;">
+    <%= link_to "Log in as Student", new_student_session_path , class: "btn btn-lg btn-primary"%>
+    <%= link_to "Log in as Professor", new_professor_session_path , class: "btn btn-lg btn-primary"%>
+  </p>
 </div>
+<% end %>

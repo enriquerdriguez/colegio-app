@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_05_085851) do
+ActiveRecord::Schema.define(version: 2018_12_12_110400) do
 
   create_table "course_subjects", force: :cascade do |t|
     t.integer "course_id"
@@ -31,17 +31,6 @@ ActiveRecord::Schema.define(version: 2018_12_05_085851) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "professors", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "telephone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "picture"
-    t.datetime "birthdate"
-  end
-
   create_table "student_subjects", force: :cascade do |t|
     t.integer "student_id"
     t.integer "subject_id"
@@ -51,23 +40,30 @@ ActiveRecord::Schema.define(version: 2018_12_05_085851) do
     t.index ["subject_id"], name: "index_student_subjects_on_subject_id"
   end
 
-  create_table "students", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "telephone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "picture"
-    t.datetime "birthdate"
-    t.integer "course_id"
-    t.index ["course_id"], name: "index_students_on_course_id"
-  end
-
   create_table "subjects", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "telephone"
+    t.string "picture"
+    t.string "type"
+    t.datetime "birthdate"
+    t.integer "course_id"
+    t.index ["course_id"], name: "index_users_on_course_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

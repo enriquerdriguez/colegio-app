@@ -1,6 +1,4 @@
 <h2>Professors</h2>
-
-<%= link_to "Create Professor", new_professor_path, class: "btn btn-success btn-md" %>
 <div class="row" style="margin-top: 2.5em;">
   <div class="col-md-10 col-md-offset-1">
     <div class="row">
@@ -25,8 +23,8 @@
             <!-- END SIDEBAR USER TITLE -->
             <!-- SIDEBAR BUTTONS -->
             <div class="profile-userbuttons">
-              <%= link_to "Edit professor", edit_professor_path(professor), class: "btn btn-success btn-sm" %>
-              <%= link_to "Delete professor", professor_path(professor), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
+              <%= link_to "Edit professor", edit_professor_registration_path(professor), class: "btn btn-success btn-sm" %>
+              <%= link_to "Delete professor", registration_path(professor), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
             </div>
           </div>
         </div>

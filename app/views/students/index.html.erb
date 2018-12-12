@@ -1,5 +1,4 @@
 <h2>Students</h2>
-<%= link_to "Create Student", new_student_path, class: "btn btn-success btn-md" %>
 
 <div class="row" style="margin-top: 2.5em;">
     <div class="col-md-10 col-md-offset-1">
@@ -25,8 +24,8 @@
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
-                  <%= link_to "Edit Student", edit_student_path(student), class: "btn btn-success btn-sm" %>
-                  <%= link_to "Delete Student", student_path(student), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
+                  <%= link_to "Edit Student", edit_student_registration_path(student), class: "btn btn-success btn-sm" %>
+                  <%= link_to "Delete Student", registration_path(student), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
                 </div>
               </div>
             </div>
