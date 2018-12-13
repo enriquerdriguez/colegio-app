@@ -7,7 +7,9 @@
       <thead>
       <th>Name</th>
       <th>Teacher</th>
+      <% if professor_signed_in? %>
       <th>Action</th>
+      <% end %>
       </thead>
       <tbody>
       <%@course.subjects.order(:name).each do |subject| %>
@@ -17,8 +19,10 @@
             course_subject = CourseSubject.where(subject_id: subject.id, course_id: @course.id).first
           %>
           <td><%= link_to course_subject.professor_first_name + " " + course_subject.professor_last_name, professor_path(course_subject.professor)   %></td>
+          <% if professor_signed_in? %>
           <td><%= link_to "Delete Subject", course_subject_path(course_subject: course_subject.id) ,method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %></td>
           <td><%= link_to "Change Professor", edit_course_subject_path(course_subject: course_subject.id) ,remote: true, class: "btn btn-primary btn-sm" %></td>
+          <% end %>
         </tr>
       <% end %>
       </tbody>
@@ -26,6 +30,7 @@
   </div>
 </div>
 
+<% if professor_signed_in? %>
 <div class="row">
   <div class="col-md-8">
     <h3>Add more subjects to course: </h3>
@@ -48,6 +53,28 @@
   </div>
   <div class="col-md-offset-2"></div>
 </div>
+<% end %>
+
+<% if student_signed_in? and @course.students.size > 0 %>
+  <div class="row">
+    <div class="col-md-offset-2"></div>
+    <div class="col-md-8">
+      <h3> Partners</h3>
+      <table class="table table-striped">
+        <thead>
+        <th>Name</th>
+        </thead>
+        <tbody>
+        <%@course.students.each do |student| %>
+          <tr>
+            <td><%= link_to student.first_name + " " + student.last_name, student_path(student) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
 
 <div id="add-teacher-modal" class="modal fade">
   <div class="modal-dialog">

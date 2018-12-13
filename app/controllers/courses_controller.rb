@@ -1,5 +1,8 @@
 class CoursesController < ApplicationController
 
+  load_and_authorize_resource
+  before_action :authenticate_user!
+  before_action :permission?, except: [:index, :show]
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -48,6 +51,13 @@ class CoursesController < ApplicationController
 
   def set_course
     @course = Course.find(params[:id])
+  end
+
+  def permission?
+    if !professor_signed_in?
+      flash[:danger] = "You are not allowed to perform that action bro"
+      redirect_to root_path
+    end
   end
 
 end

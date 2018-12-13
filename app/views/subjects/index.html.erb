@@ -1,5 +1,7 @@
 <h2>Subjects</h2>
-<%= link_to "Create Subject", new_subject_path, class: "btn btn-success btn-md" %>
+<% if professor_signed_in? %>
+  <%= link_to "Create Subject", new_subject_path, class: "btn btn-success btn-md" %>
+<% end %>
 <div class="row" style="margin-top: 2.5em;">
   <table class="table table-striped table-responsive">
     <thead>

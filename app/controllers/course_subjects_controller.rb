@@ -1,6 +1,8 @@
 class CourseSubjectsController < ApplicationController
 
+  load_and_authorize_resource
   before_action :set_course_subject, only:[ :edit, :update, :destroy]
+  before_action :permission?
 
   def create
     @course_subject = CourseSubject.create(params_course_subject)
@@ -46,6 +48,13 @@ class CourseSubjectsController < ApplicationController
 
   def params_course_subject
     params.permit(:id,:course_id, :subject_id, :professor_id)
+  end
+
+  def permission?
+    if !professor_signed_in?
+      flash[:danger] = "You are not allowed to perform that action bro"
+      redirect_to root_path
+    end
   end
 
 end

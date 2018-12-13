@@ -30,7 +30,7 @@
       </div>
       <% else %>
       <h3> Currently not teaching</h3>
-        <%= link_to "Add Course", courses_path, class: "btn btn-primary btn-lg" %>
+        <%= link_to "Add Course", courses_path, class: "btn btn-primary btn-lg" if current_user == @professor or current_user.admin? %>
       <% end %>
     </div>
   </div>

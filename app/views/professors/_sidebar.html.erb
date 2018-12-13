@@ -17,17 +17,17 @@
     <!-- END SIDEBAR USER TITLE -->
     <!-- SIDEBAR BUTTONS -->
     <div class="profile-userbuttons">
-      <%= link_to "Edit Professor", edit_professor_registration_path(@professor), class: "btn btn-success btn-sm" %>
-      <%= link_to "Delete Professor", registration_path(@professor), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
+      <% if current_user == @professor or current_user.admin? %>
+        <%= link_to "Edit Professor", edit_professor_path(@professor), class: "btn btn-success btn-sm" %>
+        <%= link_to "Delete Professor", registration_path(@professor), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
+      <% end %>
     </div>
     <!-- END SIDEBAR BUTTONS -->
     <!-- SIDEBAR MENU -->
     <div class="profile-usermenu">
       <ul class="nav">
         <li class="active">
-          <a href="#">
-            <i class="glyphicon glyphicon-home"></i>
-            Overview </a>
+          <%= link_to '<i class="glyphicon glyphicon-cog"></i> Change Password'.html_safe, edit_professor_registration_path(@professor)  %>
         </li>
         <li>
           <a href="#">

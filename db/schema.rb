@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_12_110400) do
+ActiveRecord::Schema.define(version: 2018_12_13_075126) do
 
   create_table "course_subjects", force: :cascade do |t|
     t.integer "course_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2018_12_12_110400) do
     t.string "type"
     t.datetime "birthdate"
     t.integer "course_id"
+    t.boolean "admin", default: false
     t.index ["course_id"], name: "index_users_on_course_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

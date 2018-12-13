@@ -1,5 +1,7 @@
 <h2>Students</h2>
-
+<% if current_user.admin? %>
+     <%= link_to "Create Student", new_student_path, class:"btn btn-md btn-success" %>
+   <% end %>
 <div class="row" style="margin-top: 2.5em;">
     <div class="col-md-10 col-md-offset-1">
        <div class="row">
@@ -24,8 +26,12 @@
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
-                  <%= link_to "Edit Student", edit_student_registration_path(student), class: "btn btn-success btn-sm" %>
+                  <% if current_user == student or current_user.email == "admin@admin.com"  %>
+                  <%= link_to "Edit Student", edit_student_path(student), class: "btn btn-success btn-sm" %>
                   <%= link_to "Delete Student", registration_path(student), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
+                  <% else %>
+                  <%= link_to "View profile", student_path(student), class: "btn btn-primary btn-sm" %>
+                  <% end %>
                 </div>
               </div>
             </div>

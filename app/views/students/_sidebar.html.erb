@@ -13,23 +13,23 @@
       <%= @student.birthdate.strftime("%Y/%m/%d") if !@student.birthdate.nil? %>
     </div>
     <div class="profile-usertitle-job">
-      <%#= @student.course.name + " " + @student.course.level if !@student.course.nil? %>
+      <%= @student.course.name + " " + @student.course.level if !@student.course.nil? %>
     </div>
   </div>
   <!-- END SIDEBAR USER TITLE -->
   <!-- SIDEBAR BUTTONS -->
   <div class="profile-userbuttons">
-    <%= link_to "Edit Student", edit_student_registration_path(@student), class: "btn btn-success btn-sm" %>
+    <% if current_user == @student or current_user.admin? %>
+    <%= link_to "Edit Student", edit_student_path(@student), class: "btn btn-success btn-sm" %>
     <%= link_to "Delete Student", registration_path(@student), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
+    <% end %>
   </div>
   <!-- END SIDEBAR BUTTONS -->
   <!-- SIDEBAR MENU -->
   <div class="profile-usermenu">
     <ul class="nav">
       <li class="active">
-        <a href="#">
-          <i class="glyphicon glyphicon-home"></i>
-          Overview </a>
+        <%= link_to '<i class="glyphicon glyphicon-cog"></i> Change Password'.html_safe, edit_student_registration_path(@student)  %>
       </li>
       <li>
         <a href="#">

@@ -1,16 +1,24 @@
 class ChangeCoursesController < ApplicationController
   def new
+    if !current_user
+      flash[:danger] = "You are not allowed to perform that action bro"
+      redirect_to root_path
+    end
     @courses = Course.all
     @student = Student.find(params[:student_id])
   end
 
   def create
+    if !current_user
+      flash[:danger] = "You are not allowed to perform that action bro"
+      redirect_to root_path
+    end
     student = Student.find(params[:student_id])
     course = Course.find(params[:course_id])
-    delete_asocciations(student)
+    #delete_asocciations(student)
     student.course = course
     student.save
-    add_associations(student,course)
+    #add_associations(student,course)
     redirect_to student_path(student)
 
   end
@@ -36,5 +44,6 @@ class ChangeCoursesController < ApplicationController
       end
     end
   end
+
 
 end
