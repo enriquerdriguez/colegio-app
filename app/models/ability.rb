@@ -16,6 +16,7 @@ class Ability
       can :read, Subject
       can :read, Professor
       can :read, Course
+      can :read, Student
     end
 
 

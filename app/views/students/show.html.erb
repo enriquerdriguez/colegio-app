@@ -9,7 +9,6 @@
           <thead>
           <th>Subject</th>
           <th>Teacher</th>
-          <th>Action</th>
           </thead>
           <tbody>
           <% @student.course_subjects.each do |subject| %>
@@ -19,38 +18,29 @@
             <tr>
               <td><%= subject.name %></td>
               <td><%= link_to course_subject.professor_first_name + " " + course_subject.professor_last_name, professor_path(course_subject.professor) %></td>
-              <td>
-                <%= link_to "Remove Subject", student_subject_path(student:@student.id, subject: subject.id), method: :delete, data: {confirm: "Are you sure?"} ,
-                            class: "btn btn-danger btn-sm"%>
-              </td>
+              <td><%= image_tag course_subject.professor_picture.url, size: "100x100", alt: course_subject.professor_first_name ,class: "img-responsive" if !course_subject.professor_picture.file.nil? %></td>
             </tr>
           <% end %>
           </tbody>
         </table>
       </div>
-
-      <% if @student.subjects_to_add.size < 0 %>
-        <div class="row">
-          <div class="col-md-4">
-            <h3>Add more subjects: </h3>
-            <table class="table table-striped">
-              <thead>
-              <th>Name</th>
-              <th>Action</th>
-              </thead>
-              <tbody>
-              <% @student.subjects_to_add.each do |subject| %>
-                <tr>
-                  <td><%= subject.name %></td>
-                  <td><%= link_to "Add Subject", student_subjects_path(subject: subject.id, student: @student.id), class: "btn btn-success btn-sm", method: :post %></td>
-                </tr>
-              <% end %>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-8"></div>
-        </div>
-      <% end %>
+      <!--PARTNERS -->
+      <div class="row">
+        <h3>My classmates</h3>
+        <table class="table table-striped">
+          <thead>
+          <th>Name</th>
+          </thead>
+          <tbody>
+          <%@student.course_students.each do |student| %>
+            <tr>
+              <td><%= link_to student.first_name + " " + student.last_name, student_path(student) %></td>
+              <td><%= image_tag student.picture.url, size: "100x100", alt: student.first_name ,class: "img-responsive" if !student.picture.file.nil? %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
     <!-- PROFILE SIDEBAR -->
     <div class="col-md-4">

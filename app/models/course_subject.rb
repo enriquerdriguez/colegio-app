@@ -8,5 +8,5 @@ class CourseSubject < ApplicationRecord
 
   delegate :name, :level, :id,:students, to: :course, prefix: true
   delegate :name, :id, to: :subject, prefix: true
-  delegate :first_name, :last_name, to: :professor, prefix: true
+  delegate :first_name, :last_name, :picture, to: :professor, prefix: true
 end

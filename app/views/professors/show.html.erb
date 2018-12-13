@@ -18,7 +18,9 @@
               <td><%= course_subject.subject_name %> </td>
               <td><%= link_to course_subject.course_name + " " + course_subject.course_level, course_path(course_subject.course) %></td>
               <td>
+                <% if !student_signed_in? %>
                 <%= link_to "Delete Subject", course_subject_path(course_subject: course_subject.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm"  %>
+                <% end %>
               </td>
               <td>
                 <%= link_to "View Students", professor_professor_view_students_path(professor_id: @professor.id, course_id:course_subject.course), remote: true, class: "btn btn-primary btn-sm"  %>

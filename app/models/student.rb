@@ -7,7 +7,7 @@ class Student < User
 
   mount_uploader :picture, PictureUploader
 
-  delegate :subjects, :name, :level, to: :course, prefix: true
+  delegate :subjects, :name, :level, :students, to: :course, prefix: true
 
 
   #Validations
